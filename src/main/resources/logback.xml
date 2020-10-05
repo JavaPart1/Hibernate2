@@ -1,0 +1,31 @@
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="main" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="toAFile" class="ch.qos.logback.core.FileAppender">
+        <file>logfiles/logfile.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>TRAINER: %date %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!--             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+        </encoder>
+        <!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+        <!--            <level>ERROR</level>-->
+        <!--        </filter>-->
+    </appender>
+
+
+    <logger name="be.noelvaes.hfdstk7" level="Info">
+        <appender-ref ref="Console" />
+    </logger>
+
+</configuration>
