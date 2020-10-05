@@ -3,6 +3,8 @@ package be.noelvaes.hfdstk7.domain;
 import javax.persistence.*;
 import java.util.Arrays;
 
+@NamedQuery(name = "getAllBeers",query = "select b from Beers as b")
+@NamedQuery(name = "updatePriceBeers",query = "update Beers b set b.price=b.price*:rise")
 @Entity
 public class Beers {
     @Id
@@ -111,7 +113,6 @@ public class Beers {
                 ", stock=" + stock +
                 ", alcohol=" + alcohol +
                 ", version=" + version +
-                ", image=" + Arrays.toString(image) +
                 ", category=" + category +
                 ", brewer=" + brewer +
                 '}';

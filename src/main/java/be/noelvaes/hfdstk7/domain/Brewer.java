@@ -80,4 +80,16 @@ public class Brewer {
     public void setBeers(List<Beers> beers) {
         this.beers = beers;
     }
+
+    @Override
+    public String toString() {
+        return "Brewer{" +
+                "brewerId=" + brewerId +
+                ", brewerName='" + brewerName + '\'' +
+                ", address='" + address + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", city='" + city + '\'' +
+                ", turnover=" + turnover +
+                '}';
+    }
 }

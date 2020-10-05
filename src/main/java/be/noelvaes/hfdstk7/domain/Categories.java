@@ -46,7 +46,6 @@ public class Categories {
         return "Categories{" +
                 "catId=" + catId +
                 ", catName='" + catName + '\'' +
-                ", beers=" + beers +
                 '}';
     }
 }
