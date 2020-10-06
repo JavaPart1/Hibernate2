@@ -23,39 +23,41 @@ public class ManageBeer {
             // Get existing beers, brewers & categories
             TypedQuery<Beers> queryBeers = em.createNamedQuery("getAllBeers", Beers.class);
 
-            System.out.println(pgmName + " - Start txn");
+            System.out.println(pgmName + " - Start txn Get all beers");
             tx.begin();
             List<Beers> beers = queryBeers.getResultList();
             tx.commit();
 
-//            // Get existing brewers
-//            TypedQuery<Brewer> queryBrewers = em.createNamedQuery("getAllBrewers", Brewer.class);
-//            System.out.println(pgmName + " - Start txn GetAllBrewers");
-//            tx.begin();
-//            List<Brewer> brewers = queryBrewers.getResultList();
-//            tx.commit();
-//            System.out.println(pgmName + " - Commit txn");
-//            // Get categories
-//            TypedQuery<Categories> queryCategories = em.createNamedQuery("getAllCategories", Categories.class);
-//            System.out.println(pgmName + " - Start txn GetAllCategories");
-//            tx.begin();
-//            List<Categories> categories = queryCategories.getResultList();
-//            tx.commit();
-//            System.out.println(pgmName + " - Commit txn");
+            // Get existing brewers
+            TypedQuery<Brewer> queryBrewers = em.createNamedQuery("getAllBrewers", Brewer.class);
+            System.out.println(pgmName + " - Start txn GetAllBrewers");
+            tx.begin();
+            List<Brewer> brewers = queryBrewers.getResultList();
+            tx.commit();
+            System.out.println(pgmName + " - Commit txn");
+            // Get existing categories
+            TypedQuery<Categories> queryCategories = em.createNamedQuery("getAllCategories", Categories.class);
+            System.out.println(pgmName + " - Start txn GetAllCategories");
+            tx.begin();
+            List<Categories> categories = queryCategories.getResultList();
+            tx.commit();
+            System.out.println(pgmName + " - Commit txn");
 
             // Create a new beer with existing brewer & category
             // Choose category
             Categories blond = beers.stream().filter(b -> b.getCategory().getCatName().equals("Blond")).findFirst().get().getCategory();
             Categories pils = beers.stream().filter(b -> b.getCategory().getCatName().equals("Lager")).findFirst().get().getCategory();
+            Categories dark = categories.stream().filter(c -> c.getCatName().equals("Dark")).findFirst().get();
             // Choose brewer
+            Brewer westmalle = brewers.stream().filter(br -> br.getBrewerName().contains("Westmalle")).findFirst().get();
             Brewer aBinbev = beers.stream().filter(b -> b.getBrewer().getBrewerName().equals("ABinbev")).findFirst().get().getBrewer();
             // Create Beer
-            Beers newBeer = new Beers("Gouden Carolus",4,5000,4,blond);
-            newBeer.setBrewer(aBinbev);
+            Beers newBeer = new Beers("Westmalle Trappist",8,1000,6,dark);
+            newBeer.setBrewer(westmalle);
             // Update beers in brewer
-            aBinbev.getBeers().add(newBeer);
+            westmalle.getBeers().add(newBeer);
             // Update beers in category
-            pils.getBeers().add(newBeer);
+            dark.getBeers().add(newBeer);
             System.out.println(pgmName + " - Start txn Create beer");
             tx.begin();
             em.persist(newBeer);
