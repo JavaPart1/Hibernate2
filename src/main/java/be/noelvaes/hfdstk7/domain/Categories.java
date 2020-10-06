@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "getAllCategories",query = "select c from Categories as c")
 @Entity
 public class Categories {
     @Id

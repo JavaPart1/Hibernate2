@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "getAllBrewers",query = "select br from Brewer as br")
 @Entity
 public class Brewer {
     @Id
